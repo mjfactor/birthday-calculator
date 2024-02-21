@@ -1,10 +1,14 @@
 import datetime
 
+
+def is_leap(year):
+    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+
+
 today = datetime.date.today()  # Get the date today
 thisYear = today.year
 thisMonth = today.month
 thisDay = today.day
-
 
 while True:
     year = int(input("Enter your Birth Year: "))
@@ -37,9 +41,10 @@ while True:
     else:
         break
 
-
 userBirthday = datetime.date(year, month, birthDate)
-x = (today - userBirthday).days  # This will get the exact days
+
+leap_years = sum(is_leap(y) for y in range(year, thisYear + 1))
+x = (today - userBirthday).days - leap_years
 age = x // 365  # Divide days in a year / 365 days, use floor division to cut off decimals
 
 print("-------------------------")
